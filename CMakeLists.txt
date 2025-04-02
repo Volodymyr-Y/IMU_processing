@@ -12,6 +12,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Core Gui 3DCore 3DExtras 3DRender 3DInput SerialPort)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+add_subdirectory(libs/QCustomPlot-library) # new shit
+include_directories(libs/Eigen)
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
@@ -27,8 +29,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         my3dwindow.h my3dwindow.cpp
         Madgwick.h
-
-
+        imucalibrator.h imucalibrator.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Test3DVisual APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -57,7 +58,8 @@ target_link_libraries(Test3DVisual PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
                                             Qt${QT_VERSION_MAJOR}::3DRender
                                             Qt${QT_VERSION_MAJOR}::3DInput
                                             Qt${QT_VERSION_MAJOR}::SerialPort)
-
+target_link_libraries(Test3DVisual PRIVATE qcustomplot)
+target_compile_definitions(Test3DVisual PRIVATE QCUSTOMPLOT_USE_LIBRARY)
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.

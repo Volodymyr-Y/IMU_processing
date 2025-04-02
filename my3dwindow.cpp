@@ -62,7 +62,7 @@ void My3DWindow::resizeEvent ( QResizeEvent * /*event*/ )
     resizeView(this->size());
 }
 
-void My3DWindow::updateAttitude(float x)
+void My3DWindow::updateAttitude(std::vector<float> readings)
 {
-    CuboidTransform->setRotation(QQuaternion(1,1,x,1).normalized());
+    CuboidTransform->setRotation(QQuaternion(1,1,readings[0],1).normalized());
 }

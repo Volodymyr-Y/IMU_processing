@@ -24,7 +24,7 @@ protected:
 
 public slots:
     void resizeView(QSize size);
-    void updateAttitude(float x);
+    void updateAttitude(std::vector<float> readings);
 };
 
 
