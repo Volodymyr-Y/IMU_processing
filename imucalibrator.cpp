@@ -18,3 +18,8 @@ IMUCalibrator::IMUCalibrator() {
     std::cout << m << std::endl;
 
 }
+
+void IMUCalibrator::RecordMeasurement(std::vector<float> readings)
+{
+
+}

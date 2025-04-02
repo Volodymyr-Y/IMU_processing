@@ -24,7 +24,7 @@ struct CalibrationParameters {
     float bz;
 };
 
-class IMUCalibrator
+class IMUCalibrator : public QObject
 {
     Q_OBJECT;
 private:
